@@ -4,10 +4,10 @@
 # Bails out of regex matching after first match, usually at the top of the file,
 # for efficiency (true?)
 function buildProvidesModuleSymLinks {
-  find -L $1 -name '*.js' | grep -v '__tests__' |
+  find -L $1 -name '*.js' | grep -v '__tests__' | grep -v '__test_' | grep -v '.min.js' | grep -v 'node_modules' |
     (while read n; do
        fileContents=`cat $n`;
-       mod=`echo $fileContents | grep -hoP --max-count=1 '@providesModule [\w\-]+' | awk '{print $2}'`;
+       mod=`echo $fileContents | grep -hoP --max-count=1 '@providesModule [\w\-\$]+' | awk '{print $2}'`;
       if [ -n "${mod}" ]
       then
         echo "Linking Module: ${mod}"
