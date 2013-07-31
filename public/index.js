@@ -18,9 +18,9 @@
 
 
 var React = require('react-core').React;
-var SiteBoilerPlate = require('./components/SiteBoilerPlate.jsx');
-var VectorWidget = require('./components/VectorWidget.jsx');
-var Banner = require('./components/Banner.jsx');
+var SiteBoilerPlate = require('./components/SiteBoilerPlate.js');
+var VectorWidget = require('./components/VectorWidget.js');
+var Banner = require('./components/Banner.js');
 
 
 /**
