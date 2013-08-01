@@ -20,7 +20,7 @@ var http = require('http');
 
 var PUBLIC_ROOT = __dirname + '/public';
 var app = connect()
-  .use(reactMiddleware.provide({sourceDir: PUBLIC_ROOT, dev: true}))
+  .use(reactMiddleware.provide({sourceDir: PUBLIC_ROOT,  dev: true}))
   .use(connect['static'](__dirname + '/public/static'))
   .use(connect.logger())
   .use(connect.errorHandler());
