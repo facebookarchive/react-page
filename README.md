@@ -1,4 +1,4 @@
-<img height="224px" width="704px" src="./public/static/images/ReactPageLogo@2x.png"/>
+<img height="224px" width="704px" src="./src/static_files/images/ReactPageLogo@2x.png"/>
 
 
   - **Effortlessly** render UI on the server - using client side
