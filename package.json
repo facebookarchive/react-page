@@ -1,17 +1,17 @@
 {
-  "name": "react-page-docs",
+  "name": "react-page",
   "version": "0.2.0",
-  "description": "React's JavaScript Library's documentation hub, built on react-page-middleware.",
+  "description": "Starter Application for React, CommonJS, JSX, Server Rendering.",
+  "main": "index.js",
   "dependencies": {
-    "react-core": "git://github.com/jordwalke/npm-react-core.git",
+    "React": "git://github.com/facebook/react.git",
     "react-page-middleware": "git+ssh://git@github.com/facebook/react-page-middleware.git",
-    "connect": "2.8.3",
-    "markdown": "0.4.0"
+    "connect": "2.8.3"
   },
   "author": {
     "name": "Jordan Walke",
     "email": "jordwalke@facebook.com",
-    "url": "http://github.com/leebyron"
+    "url": "http://github.com/jordwalke"
   },
   "license": "MIT"
 }

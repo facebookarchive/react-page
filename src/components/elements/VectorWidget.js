@@ -17,7 +17,7 @@
  */
 "use strict";
 
-var React = require('react-core').React;
+var React = require('React');
 var path = React.DOM.path;
 
 var MOUSE_UP_DRAG = 0.978;
@@ -96,12 +96,13 @@ var VectorWidget = React.createClass({
    * Better SVG support for React coming soon.
    */
   renderGraphic: function(rotationStyle) {
+
     return (
       <g fill="none" stroke="none">
         <g transform="translate(210.000000, 135.000000)">
           <path fill="rgba(0,0,0,0.1)" d={BORDER_PATH} />
           <path fill="#7BC7BA" d={BG_PATH} />
-          <path fill="#D7D7D9" d={BAR_PATH} />
+          <path fill="#DCDCDC" d={BAR_PATH} />
           <path fill="#D97B76" d={RED_DOT_PATH}/>
           <path fill="#DBBB79" d={YELLOW_DOT_PATH} />
           <path fill="#A6BD8A" d={GREEN_DOT_PATH}/>

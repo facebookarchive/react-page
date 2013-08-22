@@ -16,8 +16,7 @@
  * @jsx React.DOM
  */
 
-var React = require('react-core').React;
-
+var React = require('React');
 
 var MOBILE_APP_META =
   '<meta name="viewport" content="width=device-width, ' +
@@ -31,7 +30,7 @@ var MOBILE_APP_META =
  *
  * Usage:
  *
- * var React = require('react-core').React;
+ * var React = require('React');
  * var SiteBoilerPlate = require('./components/SiteBoilerPlate.jsx');
  * var MyPage = React.createClass({
  *   render: function() {

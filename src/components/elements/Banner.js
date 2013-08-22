@@ -17,7 +17,7 @@
  */
 "use strict";
 
-var React = require('react-core').React;
+var React = require('React');
 
 /**
  * Look at Banner, Michael!

@@ -17,25 +17,16 @@
  */
 
 
-var React = require('react-core').React;
-var SiteBoilerPlate = require('./components/SiteBoilerPlate.js');
-var VectorWidget = require('./components/VectorWidget.js');
-var Banner = require('./components/Banner.js');
+var React = require('React');
+var SiteBoilerPlate = require('../../components/core/SiteBoilerPlate.js');
+var Banner = require('../../components/elements/Banner');
 
-
-/**
- * TODO: Find a way to allow a component to render into two parts.
- * var i = <index flush={0}/>;
- * React.renderComponentToString(i, cb);
- * i.setProps({flush: 1});
- * React.renderComponentToString(i, cb);
- */
 var index = React.createClass({
+
   render: function() {
     return (
       <SiteBoilerPlate>
-        <Banner bannerMessage="Welcome to React"/>
-        <VectorWidget />
+        <Banner bannerMessage="About Us"/>
       </SiteBoilerPlate>
     );
   }
