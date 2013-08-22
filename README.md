@@ -12,15 +12,19 @@
 
 ##Install
 
+> Clone this project
+
     git clone https://github.com/facebook/react-page
     cd react-page
     npm install                            # install dependencies.
+    
+> Start the server and start building your app
+
     node server.js
     open http://localhost:8080/index.html  # renders UI code on the server!
-
-## Developing
-
     vim src/pages/index.js   # Make changes, and refresh your browser!
+
+##Philosophy
 
 #### Why Server Rendering?
 
@@ -36,16 +40,18 @@
   - SEO benefits of indexability and perf.
 
 
-#### Why React JavaScript Server Rendering?
+#### Why React?
 
   - React allows you to seamlessly switch between rendering on the server and
   client. When performance constraints change, simply
   change where you render - not your application code.
   - React was built from the ground up to support rendering either on the client
   or server.
-  - If you're not interested in server rendering - just ignore the server
-  rendering step and use `react-page` as a rapid app development build tool.
+  - React is functional. Explore the documenation on the [React Github Page](http://www.github.com/facebook/react/).
+  - Server rendering is optional - If you don't need it, use `react-page` as a fast project builder/template.
 
+
+##Developing
 
 #### Default Project Structure
 
@@ -91,10 +97,6 @@ implementation of `<Banner>`, you'll see that finally it outputs an `<h1>` DOM
 component. But we are not just limited to two levels of composition. React never
 imposes limits on the depth of composition.
 
-#### React Is Functional
-
-Learn more about [React](http://www.github.com/facebook/react/) and explore the
-documentation.
 
 #### Growing Your App
 
@@ -126,7 +128,42 @@ configuration, the following URL mapping would be performed.
 own router.
 
 
-#### Other Features
+#### How Does Server Rendering Work?
+
+  - `react-page` computes page markup on the server, sends it to the client so the
+    user can see it quickly.
+  - The corresponding JavaScript is then packaged and sent.
+  - The browser runs that JavaScript, so that all of the event handlers,
+  interactions and update code will run seamlessly on top of the server
+  generated markup.
+  - From the developer's (and the user's) perspective, it's just as if the
+  rendering occurred on the client, only faster.
+
+
+
+## Using React Page As A Blogging Engine:
+
+React can certainly power dynamic, network-connected apps. But unlike other JavaScript
+frameworks, React (with `react-page`) can be used to build a blog, Github documentation,
+or any other static site. Because `react-page` uses server rendering, creating a static site
+is as easy as a single `wget` comand.
+
+    node server.js
+    wget -mpck --user-agent="" -e robots=off http://localhost:8080/index.html
+    # If wget needed on Mac OS, try http://osxdaily.com/2012/05/22/install-wget-mac-os-x/
+
+Although this generates a static site, your user interactions can be every bit as
+interactive and dynamic as it is when used with a server. All of your JavaScript event
+handlers will work.
+
+**Note**: Don't forget to enable gzip on your file servers/CDN - the generated React
+markup is large, but compresses well.
+
+
+
+
+
+### Other Features
 
   - Works with `sass`/`less` or any other connect middleware.
   - Automatically performs `js` syntax transformation on the fly.
@@ -135,75 +172,13 @@ own router.
   application in the original source form!
 
 
-#### How Does it Work?
-
-  - You don't have to think about it.
-  - `react-page` routes `http` requests to the proper `.js` React components,
-  and renders their markup to a string.
-  - `react-page` sends this markup to the client so the user can see it quickly.
-  - The JavaScript corresponding to that page is packaged up and sent to the
-  client.
-  - The browser runs that JavaScript, so that all of the event handlers,
-  interactions and update code will run seamlessly on top of the server
-  generated markup.
-  - From the developer's (and the user's) perspective, it's just as if the
-  rendering occurred on the client, but the page was delivered faster.
-
-
-#### Using `react-page` As A Static Blogging Engine:
-Not only can React power server-data-driven apps, but with `react-page` you can
-easily use React to build a blog, Github documentation, or any other site that
-can be loaded from a set of static html/js/css files. Because `react-page` uses
-server rendering, you can simply perform a deep rendering of your site, to
-generate all of the pre-generated markup/JavaScript.
-
-    node server.js
-    wget -mpck --user-agent="" -e robots=off http://localhost:8080/index.html
-    # If wget needed on Mac OS, try http://osxdaily.com/2012/05/22/install-wget-mac-os-x/
-
-Although this generates a pre-rendering of your site, your user interactions can
-be every bit as interactive and dynamic as it is when used with a server. All of
-your JavaScript event handlers will work.
-
-Normally, generating pre-rendered snapshots is difficult to do with JavaScript
-rendered sites, but `react-page` leverages React's server rendering features to
-make it very easy.
-
-**Note**: Don't forget to enable gzip on your file servers - the generated React
-markup is large, but compresses well.
-
-
-## TODO:
-
-  - Experiments with optimizing page load time - incremental streaming of
-  markup/resources.
-  - Advanced packaging such as splitting projects into several independently
-  cacheable sub-packages.
-
-## FAQ/Trouble-Shooting:
+### FAQ/Trouble-Shooting:
 
 **npm install did not succeed**: You probably need to upgrade your version of
 node.
 
-## Integrating Into Packaging/Static Build tools:
 
-Sometimes you'll want to run the packaging, transforms outside of a web request
-environment. `react-page-middleware` lets you use an API called `compute` to
-simply compute a string resource and do whatever you like with it in a callback:
-The computed string is a self contained bundle that will run the main JS file as
-indicated by the path given.
-
-
-    reactMiddleware.compute({
-      logTiming: true,
-      pageRouteRoot: PAGES_DIR,           // URLs based in this directory
-      useSourceMaps: false,               // Generate client source maps.
-      jsSourcePaths: SEARCH_PATHS         // Search for sources from
-    })('index.bundle', function(str) {console.log(str);});
-
-
-
-## Motivations/Next-Steps:
+### Motivations/Next-Steps:
 `react-page` is a rapid development environment where you can experiment with
 entirely new ways of building production web apps powered by React. It provides
 a common environment that allows sharing of modules client/server architecture
@@ -225,3 +200,12 @@ concern.
 
 - Among other things, additional connect middleware should be added to prevent
 stack traces from showing up in the client.
+
+
+
+### TODO:
+
+  - Experiments with optimizing page load time - incremental streaming of
+  markup/resources.
+  - Advanced packaging such as splitting projects into several independently
+  cacheable sub-packages.
