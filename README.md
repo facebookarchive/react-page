@@ -26,7 +26,7 @@
 
 ##Philosophy
 
-#### Why Server Rendering?
+##### Why Server Rendering?
 
   - Faster initial page speed:
     - Markup can be displayed before downloading heavy JavaScript.
@@ -40,20 +40,18 @@
   - SEO benefits of indexability and perf.
 
 
-#### Why React?
+##### Why React?
 
   - React allows you to seamlessly switch between rendering on the server and
   client. When performance constraints change, simply
   change where you render - not your application code.
-  - React was built from the ground up to support rendering either on the client
-  or server.
   - React is functional. Explore the documenation on the [React Github Page](http://www.github.com/facebook/react/).
   - Server rendering is optional - If you don't need it, use `react-page` as a fast project builder/template.
 
 
 ##Developing
 
-#### Default Project Structure
+##### Default Project Structure
 
 `react-page` is a starter project for server rendering and rapid development
 with React JavaScript library. The included directory structure suggests a way
@@ -78,7 +76,7 @@ component reuse and JavaScript-centric development.
                  └── index.js        # localhost:8080/about/index.html
 
 
-#### Everything Is A Component
+##### Everything Is A Component
 
 React's philosophy is that mutation-minimal functions and composition are the
 best tools for building sophisticated applications with low complexity. The
@@ -98,7 +96,7 @@ component. But we are not just limited to two levels of composition. React never
 imposes limits on the depth of composition.
 
 
-#### Growing Your App
+##### Growing Your App
 
 In the default project configuration, `components/` contains shared UI
 components that are used across many pages. Simply `require()` them in your
@@ -106,7 +104,7 @@ application code. Then, make new components that wrap them into higher level
 components. Create pages that are React components composed of other components.
 
 
-#### Simple Default Page Routing
+##### Simple Default Page Routing
 
 The `server.js` file supplies a root directory `pageRouteRoot` that indicates
 where your pages are located in your project structure. By default, it is set to
@@ -128,7 +126,7 @@ configuration, the following URL mapping would be performed.
 own router.
 
 
-#### How Does Server Rendering Work?
+##### How Does Server Rendering Work?
 
   - `react-page` computes page markup on the server, sends it to the client so the
     user can see it quickly.
@@ -141,10 +139,10 @@ own router.
 
 
 
-## Using React Page As A Blogging Engine:
+## React Blogging Engine:
 
-React can certainly power dynamic, network-connected apps. But unlike other JavaScript
-frameworks, React (with `react-page`) can be used to build a blog, Github documentation,
+React is well suited to building dynamic, network-connected apps. But unlike other JavaScript
+frameworks, React (with `react-page`) can be used to build a static blog, Github documentation,
 or any other static site. Because `react-page` uses server rendering, creating a static site
 is as easy as a single `wget` comand.
 
@@ -154,7 +152,7 @@ is as easy as a single `wget` comand.
 
 Although this generates a static site, your user interactions can be every bit as
 interactive and dynamic as it is when used with a server. All of your JavaScript event
-handlers will work.
+handlers and JavaScript page update will still work.
 
 **Note**: Don't forget to enable gzip on your file servers/CDN - the generated React
 markup is large, but compresses well.
@@ -163,22 +161,23 @@ markup is large, but compresses well.
 
 
 
-### Other Features
+## More
 
+
+#### Features
   - Works with `sass`/`less` or any other connect middleware.
-  - Automatically performs `js` syntax transformation on the fly.
-  - If, in `server.js` you pass the `useSourceMaps: true` option, `react-page`
-  will also automatically include source maps so that you can debug your
-  application in the original source form!
+  - SourceMaps supported - In `server.js` pass `useSourceMaps: true` option to
+    `react-page-middleware` and you'll be able to debug your React JSX in original
+    form.
 
 
-### FAQ/Trouble-Shooting:
+#### FAQ/Trouble-Shooting:
 
 **npm install did not succeed**: You probably need to upgrade your version of
 node.
 
 
-### Motivations/Next-Steps:
+#### Motivations/Next-Steps:
 `react-page` is a rapid development environment where you can experiment with
 entirely new ways of building production web apps powered by React. It provides
 a common environment that allows sharing of modules client/server architecture
@@ -203,7 +202,7 @@ stack traces from showing up in the client.
 
 
 
-### TODO:
+#### TODO:
 
   - Experiments with optimizing page load time - incremental streaming of
   markup/resources.
