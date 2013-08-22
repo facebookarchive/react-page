@@ -193,12 +193,13 @@ simply compute a string resource and do whatever you like with it in a callback:
 The computed string is a self contained bundle that will run the main JS file as
 indicated by the path given.
 
-reactMiddleware.compute({
-  logTiming: true,
-  pageRouteRoot: PAGES_DIR,           // URLs based in this directory
-  useSourceMaps: false,               // Generate client source maps.
-  jsSourcePaths: SEARCH_PATHS         // Search for sources from
-})('index.bundle', function(str) {console.log(str);});
+
+    reactMiddleware.compute({
+      logTiming: true,
+      pageRouteRoot: PAGES_DIR,           // URLs based in this directory
+      useSourceMaps: false,               // Generate client source maps.
+      jsSourcePaths: SEARCH_PATHS         // Search for sources from
+    })('index.bundle', function(str) {console.log(str);});
 
 
 
