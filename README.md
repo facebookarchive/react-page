@@ -1,12 +1,10 @@
 <img height="224px" width="704px" src="./src/static_files/images/ReactPageLogo@2x.png"/>
 
 
-  - **Effortlessly** render UI on the server - using client side
-  [React](http://www.github.com/facebook/react/) code.
-  - Organize your UI components using commonJS modules.
-  - An always-up-to-date, fast packager with sourcemaps.
+  - **Effortlessly** render [React](http://www.github.com/facebook/react/) UI on the server _or_ client.
+  - Organize UI components using commonJS modules.
+  - Fast development, instant reload.
   - Quickly get started with React.
-  - Works with your existing connect middleware.
 
 <br>
 
@@ -18,10 +16,12 @@
     cd react-page
     npm install                            # install dependencies.
     
-> Start the server and start building your app
+> Try out the server rendering
 
-    node server.js
-    open http://localhost:8080/index.html  # renders UI code on the server!
+    node server.js               # open http://localhost:8080/index.html
+    
+> Build your app and reload
+
     vim src/pages/index.js   # Make changes, and refresh your browser!
 
 ##Philosophy
@@ -29,9 +29,8 @@
 ##### Why Server Rendering?
 
   - Faster initial page speed:
-    - Markup can be displayed before downloading heavy JavaScript.
-    - Markup can be generated more quickly on a fast server than with a weak
-    mobile phone CPU.
+    - Markup displayed before downloading large JavaScript.
+    - Markup can be generated more quickly on a fast server than low power client devices.
   - Faster Development and Prototyping:
     - Instantly refresh your app without waiting for any watch scripts or
     bundlers.
@@ -139,7 +138,7 @@ own router.
 
 
 
-## React Blogging Engine:
+## React As A Blogging Engine:
 
 React is well suited to building dynamic, network-connected apps. But unlike other JavaScript
 frameworks, React (with `react-page`) can be used to build a static blog, Github documentation,
@@ -150,9 +149,8 @@ is as easy as a single `wget` comand.
     wget -mpck --user-agent="" -e robots=off http://localhost:8080/index.html
     # If wget needed on Mac OS, try http://osxdaily.com/2012/05/22/install-wget-mac-os-x/
 
-Although this generates a static site, your user interactions can be every bit as
-interactive and dynamic as it is when used with a server. All of your JavaScript event
-handlers and JavaScript page update will still work.
+This generates a static site, but your user interactions are every bit as powerful/dynamic as
+a standard React page. All of your JavaScript event handlers work as usual.
 
 **Note**: Don't forget to enable gzip on your file servers/CDN - the generated React
 markup is large, but compresses well.
