@@ -45,7 +45,11 @@ var VectorWidget = React.createClass({
    * are automatically bound before being mounted.
    */
   componentDidMount: function() {
-    window.setInterval(this.onTick, 20);
+    this._interval = window.setInterval(this.onTick, 20);
+  },
+
+  componentWillUnmount: function() {
+    window.clearInterval(this._interval);
   },
 
   onTick: function() {
