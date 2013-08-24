@@ -6,7 +6,8 @@
   "dependencies": {
     "React": "git://github.com/facebook/react.git",
     "react-page-middleware": "git+ssh://git@github.com/facebook/react-page-middleware.git",
-    "connect": "2.8.3"
+    "connect": "2.8.3",
+    "optimist": "0.6.0"
   },
   "author": {
     "name": "Jordan Walke",
