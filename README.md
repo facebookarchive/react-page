@@ -4,7 +4,8 @@
   - **Effortlessly** render [React](http://www.github.com/facebook/react/) UI on the server _or_ client.
   - Organize UI components using commonJS modules.
   - Fast development, instant reload.
-  - Quickly get started with React.
+  - Quickly become productive with React.
+  - Share and use React UI components.
 
 <br>
 
@@ -42,10 +43,10 @@
 ##### Why React?
 
   - React allows you to seamlessly switch between rendering on the server and
-  client. When performance constraints change, simply
-  change where you render - not your application code.
+  client. When performance constraints change, don't rewrite your app -
+  just change _where_ you render it.
   - React is functional. Explore the documenation on the [React Github Page](http://www.github.com/facebook/react/).
-  - Server rendering is optional - If you don't need it, use `react-page` as a fast project builder/template.
+  - Server rendering is optional - If you don't need it, use `react-page` as a rapid development tool.
 
 
 ##Developing
