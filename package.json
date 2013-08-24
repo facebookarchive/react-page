@@ -13,5 +13,8 @@
     "email": "jordwalke@facebook.com",
     "url": "http://github.com/jordwalke"
   },
+  "engines": {
+    "node": ">=0.10.0"
+  },
   "license": "MIT"
 }
