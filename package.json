@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "React": "git://github.com/facebook/react.git",
-    "react-page-middleware": "gi://github.com/facebook/react-page-middleware.git",
+    "react-page-middleware": "git://github.com/facebook/react-page-middleware.git",
     "connect": "2.8.3"
   },
   "author": {
