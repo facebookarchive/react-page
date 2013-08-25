@@ -12,24 +12,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * @jsx React.DOM
  */
 
+* {
+  box-sizing: border-box;
+}
 
-var React = require('React');
-var SiteBoilerPlate = require('../../components/core/SiteBoilerPlate.js');
-var Banner = require('../../components/elements/Banner');
-
-var index = React.createClass({
-
-  render: function() {
-    return (
-      <SiteBoilerPlate>
-        <Banner bannerMessage="About Us"/>
-      </SiteBoilerPlate>
-    );
-  }
-});
-
-module.exports = index;

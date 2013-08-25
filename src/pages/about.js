@@ -13,30 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *
- *
+ * @jsx React.DOM
  */
 
-// Replace this with your own css, or use a connect less plugin.
 
-* {
-  box-sizing: border-box;
-}
+var React = require('React');
+var SiteBoilerPlate = require('../core/SiteBoilerPlate.js');
+var Banner = require('../elements/Banner/Banner.js');
 
-h1.banner {
-  opacity: 0;
-  font-family: "Helvetica";
-  color: #444;
-  font-weight: bold;
-  margin-top: 60px;
-  margin-bottom: 0px;
-  text-align: center;
-  -webkit-user-select: none;
-  font-size: 5vh; /* Chrome bug prevents resizing on window resize! */
-  width: 100%;    /* Putting width 100% causes repaint on resize */
-}
+var index = React.createClass({
 
-h1.fadeIn {
-  opacity: 1;
-  transition: opacity 3s ease-in;
-}
+  render: function() {
+    return (
+      <SiteBoilerPlate>
+        <Banner bannerMessage="About Us"/>
+      </SiteBoilerPlate>
+    );
+  }
+});
+
+module.exports = index;

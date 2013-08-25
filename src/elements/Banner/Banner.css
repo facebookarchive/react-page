@@ -12,32 +12,23 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * @jsx React.DOM
  */
-"use strict";
 
-var React = require('React');
+h1.banner {
+  opacity: 0;
+  font-family: "Helvetica";
+  color: #444;
+  font-weight: bold;
+  margin-top: 60px;
+  margin-bottom: 0px;
+  text-align: center;
+  -webkit-user-select: none;
+  font-size: 5vh; /* Chrome bug prevents resizing on window resize! */
+  width: 100%;    /* Putting width 100% causes repaint on resize */
+}
 
-/**
- * Look at Banner, Michael!
- */
-var Banner = React.createClass({
-  getInitialState: function() {
-    return {initialized: false};
-  },
-  componentDidMount: function() {
-    this.setState({initialized: true});
-  },
-  render: function() {
-    var classes =
-      'banner ' + (this.state.initialized ? 'fadeIn' : '');
-    return (
-      <h1 class={classes}>
-        {this.props.bannerMessage}
-      </h1>
-    );
-  }
-});
+h1.banner.fadeIn {
+  opacity: 1;
+  transition: opacity 3s ease-in;
+}
 
-module.exports = Banner;

@@ -18,6 +18,26 @@
 
 var React = require('React');
 
+/**
+ * We should support/experiment with modelling css dependencies using the exact
+ * same commonJS resolution, so that we can include CSS files in our React npm
+ * modules. An npm module should include everything needed to work with your
+ * component - and it is impossible to know where your component will be
+ * installed to.
+ *
+ *    // Depends on css from my project - relative paths automatically resolved.
+ *    require('./SiteBoilerPlate.css');
+ *
+ *    // Depends on css from dependency 'bootstrap' in package.json
+ *    require('bootstrap/Text-Input.css');
+ *
+ * For now, you have to (one by one) make sure the index.js page includes the
+ * css file your project depends on directly. Even in that case, we'll use
+ * commonJS resolution for css files as well, so that if you whitelist things in
+ * node_modules for inclusion in your bundle, the resources in those will be
+ * accessible as well.
+ */
+
 var MOBILE_APP_META =
   '<meta name="viewport" content="width=device-width, ' +
   'initial-scale=1.0, user-scalable=no" />';
@@ -42,13 +62,15 @@ var MOBILE_APP_META =
  *   }
  * });
  */
+
 var SiteBoilerPlate = React.createClass({
   render: function() {
     return (
       <html>
         <head>
           <meta dangerouslySetInnerHTML={{__html: MOBILE_APP_META}} />
-          <link rel="stylesheet" href="/css/main.css" />
+          <link rel="stylesheet" href="/core/SiteBoilerPlate.css" />
+          <link rel="stylesheet" href="/elements/Banner/Banner.css" />
         </head>
         <body>
           {this.props.children}

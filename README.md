@@ -1,4 +1,4 @@
-<img height="224px" width="704px" src="./src/static_files/images/ReactPageLogo@2x.png"/>
+<img height="224px" width="704px" src="./src/elements/Banner/ReactPageLogo@2x.png"/>
 
 
   - **Effortlessly** render [React](http://www.github.com/facebook/react/) UI on the server _or_ client.
@@ -15,11 +15,11 @@
     git clone https://github.com/facebook/react-page
     cd react-page
     npm install                            # install dependencies.
-    
+
 > Try out the server rendering
 
     node server.js               # open http://localhost:8080/index.html
-    
+
 > Build your app and reload
 
     vim src/pages/index.js   # Make changes, and refresh your browser!
@@ -63,16 +63,13 @@ component reuse and JavaScript-centric development.
      ├── server.js                   # Start web server with `node server.js`
      ├── ...                         # Create more pages/directories here
      └── src                         # All your application JS.
-         ├── static_files/           # Static assets like css/images.
-         │   └── ...
-         ├── components/             # Shared React components.
+         ├── elements/               # Shared React components.
          │   ├── SiteBoilerPlate.js  # Reusable html/body component
-         │   ├── Banner.js           # A sample widget for displaying text
-         │   └── ...                 # Add yours here
-         └── pages
-             ├── index.js            # localhost:8080/index.html routed here
-             └── about/              # Make your site structure
-                 └── index.js        # localhost:8080/about/index.html
+         │   └── Banner.js           # An example component for displaying text
+         │
+         ├── index.js                # localhost:8080/index.html routed here
+         └── pages                   # Make your site structure
+             └── about.js            # localhost:8080/about.html
 
 
 ##### Everything Is A Component
@@ -81,34 +78,35 @@ React's philosophy is that mutation-minimal functions and composition are the
 best tools for building sophisticated applications with low complexity. The
 building block of composition in React is the _"component"_. `react-page` is no
 different. In fact, with `react-page`, the _entire page_ is a component that
-composes other components. `react-page/src/pages/index.js` corresponds to the
+composes other components. `react-page/src/index.js` corresponds to the
 main `index.html` page. As you guessed, even `index.js` is a React component that
 renders the `<html>`,`<body>`, and all the contents of the main `index.html`
 page.
 
 One thing to note, is that `index.js` doesn't just output all the `<div>`s and
 `<span>`s directly - it _composes_ other components that take on some of that
-responsibility. If you drill down into the `index.js` file, you'll see that it
-composes a `<Banner>` component. If you dive one level deeper into the
-implementation of `<Banner>`, you'll see that finally it outputs an `<h1>` DOM
-component. But we are not just limited to two levels of composition. React never
-imposes limits on the depth of composition.
+responsibility. You'll see that `index.js` composes a `<Banner>` component. If
+you dive one level deeper into the implementation of `<Banner>`, you'll see that
+it outputs an `<h1>` DOM component. But we are not just limited to two levels of
+composition. React never imposes limits on the depth of composition.
 
 
 ##### Growing Your App
 
-In the default project configuration, `components/` contains shared UI
-components that are used across many pages. Simply `require()` them in your
-application code. Then, make new components that wrap them into higher level
-components. Create pages that are React components composed of other components.
+In the default project skeleton, `src/element/` contains shared UI components
+that can be used across many pages. Rearrange the directory structure to fit
+your needs. Simply `require()` any of the modules in the `src` directory as you
+would standard commonJS modules. Make new components that wrap them into higher
+level components.
 
 
 ##### Simple Default Page Routing
 
-The `server.js` file supplies a root directory `pageRouteRoot` that indicates
-where your pages are located in your project structure. By default, it is set to
-`/absolute-path-to/src/pages/` which means that URLs will be mapped to
-corresponding JavaScript components as follows.
+Requests to `path/file.html` are routed to your React component located at
+`src/path/file.js`. By default all page requests are routed to the `src`
+directory, but you can customize that behavior via the `pageRouteRoot` setting.
+
+Here are a couple of examples of the default configuration:
 
     http://localhost:8080/index.html => react-page/src/pages/index.js
     http://localhost:8080/docs/hello.html => react-page/src/pages/docs/hello.js
@@ -123,6 +121,13 @@ configuration, the following URL mapping would be performed.
   that renders the page, including `html/body` tags.
 - You can also customize the routing to be more intelligent by supplying your
 own router.
+
+##### Static File Routing
+
+`react-page` uses `connect` to perform static file routing. The default
+configuration will simply look for static files in the `src` directory.
+
+    http://localhost:8080/path/img.png => react-page/src/path/img.png
 
 
 ##### How Does Server Rendering Work?
@@ -140,9 +145,9 @@ own router.
 
 ## React As A Blogging Engine:
 
-React is well suited to building dynamic, network-connected apps. But unlike other JavaScript
-frameworks, React (with `react-page`) can be used to build a static blog, Github documentation,
-or any other static site. Because `react-page` uses server rendering, creating a static site
+React can power dynamic, network-connected apps. But with `react-page`, React
+can also be used to build a static blog, Github documentation, or any other
+static site. Because `react-page` uses server rendering, creating a static site
 is as easy as a single `wget` comand.
 
     node server.js
@@ -158,11 +163,33 @@ markup is large, but compresses well.
 
 
 
-
 ## More
+
+#### Command Line Flags to `server.js`.
+
+`server.js` accepts several option paramaters
+
+    node server.js --useSourceMaps=true
+
+Some of the options (along with their defaults) are:
+
+    --useSourceMaps=true
+    --useBrowserBuiltins=false     # Allows use of node modules (util/etc)
+    --logTiming=true               # Shows colored build timing metrics
+    --pageRouteRoot=<root_dir>     # page URLs considered with respect to this.
+
+
+#### Node Modules in the Browser:
+
+Requiring modules installed via NPM should work. If your project requires
+node.js modules (such as `require('util')`, make sure to enable the
+`useBrowserBuiltins` options. If you are npm installing modules that are not
+purely UI js, then you likely need to enable this.
 
 
 #### Features
+  - `react-page` is a thin, cloneable/forkable example of of
+  [react-page-middleware](http://www.github.com/facebook/react-page-middleware/).
   - Works with `sass`/`less` or any other connect middleware.
   - SourceMaps supported - In `server.js` pass `useSourceMaps: true` option to
     `react-page-middleware` and you'll be able to debug your React JSX in original
@@ -206,3 +233,6 @@ stack traces from showing up in the client.
   markup/resources.
   - Advanced packaging such as splitting projects into several independently
   cacheable sub-packages.
+  - require('image/path/img.jpg') should resolve to image path.
+  - A way to automatically package/bundle css, regardless of file path of
+  depending js resource. (using require('commonJSPath/to/css.css'))

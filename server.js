@@ -23,38 +23,34 @@ var reactMiddleware = require('react-page-middleware');
 var argv = optimist.argv;
 
 var PROJECT_ROOT = __dirname;
+var FILE_SERVE_ROOT = path.join(PROJECT_ROOT, 'src');
 
 var port = argv.port;
-var searchPaths = argv._.map(function(possiblyRelative) {
-  return path.resolve(PROJECT_ROOT, possiblyRelative);
-});
-
-/**
- * Make sure to include our package.json root folder, and the location of React
- * core sources.
- */
-var REACT_LOCATION = PROJECT_ROOT + '/node_modules/react-tools/src';
-var SEARCH_PATHS = [PROJECT_ROOT, REACT_LOCATION];
-
-var allSearchPaths = SEARCH_PATHS.concat(searchPaths);
 
 var isServer = !argv.computeForPath;
 
 var serverDefaults = {
+  useBrowserBuiltins: false,
   logTiming: true,
   useSourceMaps: true,
-  pageRouteRoot: path.join(PROJECT_ROOT, 'src/pages')
+  pageRouteRoot: FILE_SERVE_ROOT
 };
 
 var computeDefaults = {
+  useBrowserBuiltins: false,
   logTiming: false,
   useSourceMaps: false,
-  pageRouteRoot: path.join(PROJECT_ROOT, 'src/pages')
+  pageRouteRoot: FILE_SERVE_ROOT
 };
 
 var defaults = isServer ? serverDefaults : computeDefaults;
 
 var buildOptions = {
+  projectRoot: PROJECT_ROOT,
+  useBrowserBuiltins:                           // Include node util modules.
+    'useBrowserBuiltins' in argv ?
+    argv.useBrowserBuiltins === 'true' :
+    defaults.useBrowserBuiltins,
   logTiming: 'logTiming' in argv ?              // Colored timing logs.
     argv.logTiming === 'true' :
     defaults.logTiming,
@@ -63,7 +59,6 @@ var buildOptions = {
   useSourceMaps: 'useSourceMaps' in argv ?
     argv.useSourceMaps === 'true' :
     defaults.useSourceMaps,                     // Generate client source maps.
-  jsSourcePaths: allSearchPaths,                // Search for sources from
   ignorePaths: function(p) {                    // Additional filtering
     return p.indexOf('__tests__') !== -1;
   }
@@ -76,7 +71,7 @@ if (!isServer) {
 } else {
   var app = connect()
     .use(reactMiddleware.provide(buildOptions))
-    .use(connect['static'](__dirname + '/src/static_files'))
+    .use(connect['static'](FILE_SERVE_ROOT))
     .use(connect.logger())
     .use(connect.compress())
     .use(connect.errorHandler());
