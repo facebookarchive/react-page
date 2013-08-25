@@ -1,11 +1,9 @@
 <img height="224px" width="704px" src="./src/elements/Banner/ReactPageLogo@2x.png"/>
 
 
-  - **Effortlessly** render [React](http://www.github.com/facebook/react/) UI on the server _or_ client.
-  - Organize UI components using commonJS modules.
-  - Fast development, instant reload.
-  - Quickly become productive with React.
-  - Share and use React UI components.
+  - <h4>Render [React](http://www.github.com/facebook/react/) pages on the server or client - _effortlessly_.</h4>
+  - <h4>Use commonJS to build and share UI components.</h4>
+  - <h4>Develop rapidly - instant reloading.</h4>
 
 <br>
 
@@ -19,44 +17,36 @@
 
 > Try out the server rendering
 
-    node server.js               # open http://localhost:8080/index.html
+    node server.js
+    # open http://localhost:8080/index.html
+    # Make changes to src/index.js, and refresh instantly!
 
-> Build your app and reload
-
-    vim src/pages/index.js   # Make changes, and refresh your browser!
 
 ##Philosophy
 
 ##### Why Server Rendering?
 
-  - Faster initial page speed:
-    - Markup displayed before downloading large JavaScript.
-    - Markup can be generated more quickly on a fast server than low power client devices.
-  - Faster Development and Prototyping:
-    - Instantly refresh your app without waiting for any watch scripts or
-    bundlers.
-  - Easy deployment of static content pages/blogs: just archive using recursive
-  `wget`.
-  - SEO benefits of indexability and perf.
+  - Faster Pages: Markup displayed before downloading JS (with SEO benefits)
+  - Page generation on a fast server vs. low power client devices.
+  - Instantly refresh while developing.
+  - Static content sites: As easy as a single `wget` command.
 
 
 ##### Why React?
 
-  - React allows you to seamlessly switch between rendering on the server and
-  client. When performance constraints change, don't rewrite your app -
-  just change _where_ you render it.
+  - React is a client/server rendering framework from the ground up.
+  - When performance constraints change, simply change _where_ you render it - don't change your app.
   - React is functional. Explore the documenation on the [React Github Page](http://www.github.com/facebook/react/).
-  - Server rendering is optional - If you don't need it, use `react-page` as a rapid development tool.
+  - Server rendering optional - you can always just use React as a declarative client side framework.
 
 
 ##Developing
 
-##### Default Project Structure
+#### Default Project Structure
 
-`react-page` is a starter project for server rendering and rapid development
-with React JavaScript library. The included directory structure suggests a way
-to organize an interactive single _or_ multi-page app with a focus on
-component reuse and JavaScript-centric development.
+The included directory structure suggests a way to organize a single _or_ multi-page app.
+`npm install` other components/libraries and they automatically work. It's the same commonJS
+that you know and love.
 
 
     react-page/
@@ -73,35 +63,26 @@ component reuse and JavaScript-centric development.
              └── about.js            # localhost:8080/about.html
 
 
-##### Everything Is A Component
+#### Everything Is A Component
 
 React's philosophy is that mutation-minimal functions and composition are the
-best tools for building sophisticated applications with low complexity. The
-building block of composition in React is the _"component"_. `react-page` is no
-different. In fact, with `react-page`, the _entire page_ is a component that
-composes other components. `react-page/src/index.js` corresponds to the
-main `index.html` page. As you guessed, even `index.js` is a React component that
-renders the `<html>`,`<body>`, and all the contents of the main `index.html`
-page.
+best tools for building sophisticated applications with low complexity. In React,
+_"components"_ are the tool for composing. `react-page` embraces this simplicity,
+even allowing the _entire page_ to be expressed as an arbitrarily deep composition
+of components.
 
-One thing to note, is that `index.js` doesn't just output all the `<div>`s and
-`<span>`s directly - it _composes_ other components that take on some of that
-responsibility. You'll see that `index.js` composes a `<Banner>` component. If
-you dive one level deeper into the implementation of `<Banner>`, you'll see that
-it outputs an `<h1>` DOM component. But we are not just limited to two levels of
-composition. React never imposes limits on the depth of composition.
+`react-page/src/index.js` corresponds to `index.html`. `index.js` is a React
+component that renders the `<html>`,`<body>`, and all the contents of the page.
 
+If you look at `index.js`, you'll notice that it doesn't output all the `<div>`s
+and `<span>`s directly - it _composes_ other components that take on much of that
+responsibility. `index.js` composes a `<Banner>` component, and inside of `Banner.js`,
+you'll see that the implementation of `<Banner>` outputs an `<h1>` DOM component.
+Even DOM representations such as `<h1`> are components in React
 
-##### Growing Your App
+To build out your app, just add or install more components with `npm`.
 
-In the default project skeleton, `src/element/` contains shared UI components
-that can be used across many pages. Rearrange the directory structure to fit
-your needs. Simply `require()` any of the modules in the `src` directory as you
-would standard commonJS modules. Make new components that wrap them into higher
-level components.
-
-
-##### Simple Default Page Routing
+#### Simple Default Page Routing
 
 Requests to `path/file.html` are routed to your React component located at
 `src/path/file.js`. By default all page requests are routed to the `src`
@@ -111,27 +92,16 @@ Here are a couple of examples of the default configuration:
 
     http://localhost:8080/index.html => react-page/src/pages/index.js
     http://localhost:8080/docs/hello.html => react-page/src/pages/docs/hello.js
-
-As is the convention for web requests, if the ending URL does not have an
-extension, `/index.html` will be appended for you. With the default
-configuration, the following URL mapping would be performed.
-
     http://localhost:8080/about => react-page/src/pages/about/index.js
-
-- Every routing must map to a `.js` file that exports a single React component,
-  that renders the page, including `html/body` tags.
-- You can also customize the routing to be more intelligent by supplying your
-own router.
-
-##### Static File Routing
-
-`react-page` uses `connect` to perform static file routing. The default
-configuration will simply look for static files in the `src` directory.
-
     http://localhost:8080/path/img.png => react-page/src/path/img.png
 
 
-##### How Does Server Rendering Work?
+- Currently, every `html` routing must map to a `.js` file that exports a single React
+  component, that renders the page, including `html/body` tags.
+- Routing is customizable (more later).
+
+
+## How Does Server Rendering Work?
 
   - `react-page` computes page markup on the server, sends it to the client so the
     user can see it quickly.
@@ -141,6 +111,23 @@ configuration will simply look for static files in the `src` directory.
   generated markup.
   - From the developer's (and the user's) perspective, it's just as if the
   rendering occurred on the client, only faster.
+
+
+
+## Command Line Usage:
+
+    # --useSourceMaps=true        # default:true
+    # --useBrowserBuiltins=false  # Allow node modules (util)  - default:false
+    # --logTiming=true            # Shows colored timing metrics - default:true
+    # --pageRouteRoot=<root_dir>  # page URLs root - default: react-page/src
+    
+    # for example:
+    node server.js --useSourceMaps=true
+
+
+**Node Modules in the Browser:** You can use modules installed via `npm`,
+but if anything requires builtin modules (such as `util`), make sure to
+enable the `useBrowserBuiltins` option.
 
 
 
@@ -155,81 +142,34 @@ is as easy as a single `wget` comand.
     wget -mpck --user-agent="" -e robots=off http://localhost:8080/index.html
     # If wget needed on Mac OS, try http://osxdaily.com/2012/05/22/install-wget-mac-os-x/
 
-This generates a static site, but your user interactions are every bit as powerful/dynamic as
-a standard React page. All of your JavaScript event handlers work as usual.
-
-**Note**: Don't forget to enable gzip on your file servers/CDN - the generated React
-markup is large, but compresses well.
+This prebuilds your entire interactive site, so it can be served from a file server or github etc.
+**Don't forget** to enable gzip on your file server! React markup is large but compresses very well.
 
 
 
+## Motivations/Next-Steps:
 
-## More
+-`react-page` is a rapid development environment for xperimenting with new ways of
+building production web apps powered by React. It provides a common environment
+that allows sharing of modules client/server architecture prototypes.
 
-#### Command Line Flags to `server.js`.
+In order to use this technology in a production environment, you must audit and
+verify that the server rendering strategy is safe and suitable for your purposes.
 
-`server.js` accepts several option paramaters
+- You  must ensure that a proper server sandbox is enforced. However, `react-page`
+_does_ run your UI rendering code inside of contextify as a preliminary sandbox.
 
-    node server.js --useSourceMaps=true
+- In production, the js packaging features of `react-page` should be performed
+ahead of time and stored in a CDN. However, dynamic server rendering
+is a compelling production feature.
 
-Some of the options (along with their defaults) are:
-
-    --useSourceMaps=true
-    --useBrowserBuiltins=false     # Allows use of node modules (util/etc)
-    --logTiming=true               # Shows colored build timing metrics
-    --pageRouteRoot=<root_dir>     # page URLs considered with respect to this.
-
-
-#### Node Modules in the Browser:
-
-Requiring modules installed via NPM should work. If your project requires
-node.js modules (such as `require('util')`, make sure to enable the
-`useBrowserBuiltins` options. If you are npm installing modules that are not
-purely UI js, then you likely need to enable this.
-
-
-#### Features
-  - `react-page` is a thin, cloneable/forkable example of of
-  [react-page-middleware](http://www.github.com/facebook/react-page-middleware/).
-  - Works with `sass`/`less` or any other connect middleware.
-  - SourceMaps supported - In `server.js` pass `useSourceMaps: true` option to
-    `react-page-middleware` and you'll be able to debug your React JSX in original
-    form.
-
-
-#### FAQ/Trouble-Shooting:
-
-**npm install did not succeed**: You probably need to upgrade your version of
-node.
-
-
-#### Motivations/Next-Steps:
-`react-page` is a rapid development environment where you can experiment with
-entirely new ways of building production web apps powered by React. It provides
-a common environment that allows sharing of modules client/server architecture
-prototypes.
-
-In order to use this technology in a production environment, you would need to
-audit and verify that the server rendering strategy is safe and suitable for
-your purposes.
-
-- In particular, you would want to ensure that a proper server
-sandbox is enforced. However, `react-page` _does_ run your UI rendering code
-inside of contextify as a preliminary sandbox.
-
-- The packaging/transforming features of `react-page` would not be needed in a
-production environment where the packages can be prebuilt once, stored in a CDN
-and not be repackaged on the fly, but the server rendering feature is very
-compelling for production environments where page load performance is of great
-concern.
-
-- Among other things, additional connect middleware should be added to prevent
-stack traces from showing up in the client.
-
+- Additional connect middleware should be added to prevent stack traces from showing
+up in browser.
 
 
 #### TODO:
 
+  - Allow sharing of css/images through npm packages.
   - Experiments with optimizing page load time - incremental streaming of
   markup/resources.
   - Advanced packaging such as splitting projects into several independently
