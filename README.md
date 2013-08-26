@@ -140,7 +140,8 @@ is as easy as a single `wget` comand.
 
     node server.js
     wget -mpck --user-agent="" -e robots=off http://localhost:8080/index.html
-    # If wget needed on Mac OS, try http://osxdaily.com/2012/05/22/install-wget-mac-os-x/
+    # get wget on OS X: try http://osxdaily.com/2012/05/22/install-wget-mac-os-x/
+    # or if you have brew: brew install wget
 
 This prebuilds your entire interactive site, so it can be served from a file server or github etc.
 **Don't forget** to enable gzip on your file server! React markup is large but compresses very well.
