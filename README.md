@@ -60,7 +60,7 @@ that you know and love.
          │
          ├── index.js                # localhost:8080/index.html routed here
          └── pages                   # Make your site structure
-             └── about.js            # localhost:8080/about.html
+             └── about.js            # localhost:8080/pages/about.html
 
 
 #### Everything Is A Component
