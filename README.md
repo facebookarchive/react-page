@@ -36,7 +36,7 @@
 
   - React is a client/server rendering framework from the ground up.
   - When performance constraints change, simply change _where_ you render it - don't change your app.
-  - React is functional. Explore the documenation on the [React Github Page](http://www.github.com/facebook/react/).
+  - React is functional. Explore the documentation on the [React Github Page](http://www.github.com/facebook/react/).
   - Server rendering optional - you can always just use React as a declarative client side framework.
 
 
@@ -136,7 +136,7 @@ enable the `useBrowserBuiltins` option.
 React can power dynamic, network-connected apps. But with `react-page`, React
 can also be used to build a static blog, Github documentation, or any other
 static site. Because `react-page` uses server rendering, creating a static site
-is as easy as a single `wget` comand.
+is as easy as a single `wget` command.
 
     node server.js
     wget -mpck --user-agent="" -e robots=off http://localhost:8080/index.html
@@ -150,7 +150,7 @@ This prebuilds your entire interactive site, so it can be served from a file ser
 
 ## Motivations/Next-Steps:
 
--`react-page` is a rapid development environment for xperimenting with new ways of
+-`react-page` is a rapid development environment for experimenting with new ways of
 building production web apps powered by React. It provides a common environment
 that allows sharing of modules client/server architecture prototypes.
 
