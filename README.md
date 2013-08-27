@@ -2,7 +2,7 @@
 
 
   - <h4>Render [React](http://www.github.com/facebook/react/) pages on the server or client - _effortlessly_.</h4>
-  - <h4>Use commonJS to build and share UI components.</h4>
+  - <h4>Use CommonJS to build and share UI components.</h4>
   - <h4>Develop rapidly - instant reloading.</h4>
 
 <br>
