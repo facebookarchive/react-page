@@ -61,7 +61,8 @@ var buildOptions = {
     defaults.useSourceMaps,                     // Generate client source maps.
   ignorePaths: function(p) {                    // Additional filtering
     return p.indexOf('__tests__') !== -1;
-  }
+  },
+  blacklistRE: argv.blacklistRE && new RegExp(argv.blacklistRE)
 };
 
 if (!isServer) {
