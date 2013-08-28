@@ -38,10 +38,6 @@ var React = require('React');
  * accessible as well.
  */
 
-var MOBILE_APP_META =
-  '<meta name="viewport" content="width=device-width, ' +
-  'initial-scale=1.0, user-scalable=no" />';
-
 /**
  * Component for performing some redundant site wrapping. Customize to your
  * liking, or create a new, similar module. `react-page` automatically ensures
@@ -68,7 +64,11 @@ var SiteBoilerPlate = React.createClass({
     return (
       <html>
         <head>
-          <meta dangerouslySetInnerHTML={{__html: MOBILE_APP_META}} />
+          <title>React Page | Client-Server JavaScript Rendering</title>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, user-scalable=no"
+          />
           <link rel="stylesheet" href="/core/SiteBoilerPlate.css" />
           <link rel="stylesheet" href="/elements/Banner/Banner.css" />
         </head>
