@@ -62,7 +62,8 @@ var buildOptions = {
   ignorePaths: function(p) {                    // Additional filtering
     return p.indexOf('__tests__') !== -1;
   },
-  blacklistRE: argv.blacklistRE && new RegExp(argv.blacklistRE)
+  blacklistRE: argv.blacklistRE && new RegExp(argv.blacklistRE),
+  dev: argv.dev === 'true'
 };
 
 if (!isServer) {
