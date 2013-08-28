@@ -64,6 +64,7 @@ var SiteBoilerPlate = React.createClass({
     return (
       <html>
         <head>
+          <title>React Page | Client-Server JavaScript Rendering</title>
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0, user-scalable=no"
