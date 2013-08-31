@@ -54,8 +54,8 @@ var buildOptions = {
   logTiming: 'logTiming' in argv ?              // Colored timing logs.
     argv.logTiming === 'true' :
     defaults.logTiming,
-  pageRouteRoot: 'pageRoutRoot' in argv ?
-    argv.pageRoutRoot : defaults.pageRouteRoot, // URLs based in this directory
+  pageRouteRoot: 'pageRouteRoot' in argv ?
+    argv.pageRouteRoot : defaults.pageRouteRoot, // URLs based in this directory
   useSourceMaps: 'useSourceMaps' in argv ?
     argv.useSourceMaps === 'true' :
     defaults.useSourceMaps,                     // Generate client source maps.
