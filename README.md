@@ -92,7 +92,7 @@ Here are a couple of examples of the default configuration:
 
     http://localhost:8080/index.html => react-page/src/pages/index.js
     http://localhost:8080/docs/hello.html => react-page/src/pages/docs/hello.js
-    http://localhost:8080/about => react-page/src/pages/about/index.js
+    http://localhost:8080/pages/about.html => react-page/src/pages/about/index.js
     http://localhost:8080/path/img.png => react-page/src/path/img.png
 
 
