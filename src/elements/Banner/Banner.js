@@ -53,7 +53,7 @@ var Banner = React.createClass({
     var classes =
       'banner ' + (this.state.initialized ? 'fadeIn' : '');
     return (
-      <h1 class={classes}>
+      <h1 className={classes}>
         {this.props.bannerMessage}
       </h1>
     );
