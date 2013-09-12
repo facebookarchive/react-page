@@ -16,8 +16,6 @@
  * @jsx React.DOM
  */
 
-require('es5-shim/es5-sham');
-
 var Banner = require('./elements/Banner/Banner.js');
 var React = require('React');
 var SiteBoilerPlate = require('./core/SiteBoilerPlate.js');
