@@ -18,6 +18,8 @@
 "use strict";
 
 var React = require('React');
+var Rx = require('rx');
+var RxMixin = require('../../rxutils/RxMixin');
 
 /**
  * We should support/experiment with modelling css dependencies using the exact
@@ -43,21 +45,28 @@ var React = require('React');
  * Look at Banner, Michael!
  */
 var Banner = React.createClass({
+
+  mixins: [RxMixin],
+
   getInitialState: function() {
-    return {initialized: false};
+    return { classes: 'banner' };
   },
-  componentDidMount: function() {
-    this.setState({initialized: true});
+
+  getStreams: function() {
+    var classes = this.props.isPressedInput.map(isPressed => 
+      isPressed ? 'banner fadeIn' : 'banner'
+    );
+    return { classes };
   },
+
   render: function() {
-    var classes =
-      'banner ' + (this.state.initialized ? 'fadeIn' : '');
     return (
-      <h1 className={classes}>
+      <h1 className={this.state.classes}>
         {this.props.bannerMessage}
       </h1>
     );
   }
+
 });
 
 module.exports = Banner;

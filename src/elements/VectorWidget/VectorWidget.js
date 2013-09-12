@@ -18,6 +18,9 @@
 "use strict";
 
 var React = require('React');
+var Rx = require('rx');
+var RxMixin = require('../../rxutils/RxMixin');
+
 var path = React.DOM.path;
 
 var MOUSE_UP_DRAG = 0.978;
@@ -30,47 +33,59 @@ var BASE_VEL = 0.15;
  * An animated SVG component.
  */
 var VectorWidget = React.createClass({
-  /**
-   * Initialize state members.
-   */
+
+  mixins: [RxMixin],
+
   getInitialState: function() {
-    return {degrees: 0, velocity: 0, drag: MOUSE_UP_DRAG};
+    return {
+      degrees: 0,
+      velocity: 0
+    };
   },
 
-  /**
-   * When the component is mounted into the document - this is similar to a
-   * constructor, but invoked when the instance is actually mounted into the
-   * document. Here's, we'll just set up an animation loop that invokes our
-   * method. Binding of `this.onTick` is not needed because all React methods
-   * are automatically bound before being mounted.
-   */
-  componentDidMount: function() {
-    this._interval = window.setInterval(this.onTick, 20);
+  getSubjects: function() {
+    return {
+      mouseup: new Rx.Subject(),
+      mousedown: new Rx.Subject()
+    };
   },
 
-  componentWillUnmount: function() {
-    window.clearInterval(this._interval);
-  },
+  getStreams: function() {
+    var mouseup = this.subjects.mouseup;
+    var mousedown = this.subjects.mousedown;
 
-  onTick: function() {
-    var nextDegrees = this.state.degrees + BASE_VEL + this.state.velocity;
-    var nextVelocity = this.state.velocity * this.state.drag;
-    this.setState({degrees: nextDegrees, velocity: nextVelocity});
-  },
-  
-  /**
-   * When mousing down, we increase the friction down the velocity.
-   */
-  handleMouseDown: function() {
-    this.setState({drag: MOUSE_DOWN_DRAG});
-  },
+    var timer = Rx.Observable.timer(20, 20).publish().refCount();
 
-  /**
-   * Cause the rotation to "spring".
-   */
-  handleMouseUp: function() {
-    var nextVelocity = Math.min(this.state.velocity + CLICK_ACCEL, MAX_VEL);
-    this.setState({velocity: nextVelocity, drag: MOUSE_UP_DRAG});
+    var mouseIsDown = mouseup.map(e => false).merge(mousedown.map(e => true));
+
+    mouseIsDown.subscribe(this.props.isPressedOutput);
+
+    var drag = mouseIsDown.map(
+      isDown => isDown ? MOUSE_DOWN_DRAG : MOUSE_UP_DRAG
+    );
+
+    var velocityState = this.state.velocity;
+
+    var velocityFromTimer = drag.combineLatest(timer, drag => velocityState * drag);
+
+    var velocityFromMouseUp = mouseup.map(
+      e => Math.min(velocityState + CLICK_ACCEL, MAX_VEL)
+    );
+
+    var velocity = velocityFromTimer
+      .merge(velocityFromMouseUp)
+      .do(value => velocityState = value);
+
+    var degreesState = this.state.degrees;
+
+    var degrees = timer.map(t => degreesState + BASE_VEL + velocityState)
+      .do(value => degreesState = value);
+
+    return {
+      degrees,
+      velocity,
+      drag
+    };
   },
 
   /**
@@ -89,8 +104,8 @@ var VectorWidget = React.createClass({
         viewBox="0 0 700 700"
         version="1.1"
         style={{cursor: 'pointer'}}
-        onMouseDown={this.handleMouseDown}
-        onMouseUp={this.handleMouseUp}>
+        onMouseDown={this.handlers.mousedown}
+        onMouseUp={this.handlers.mouseup}>
         {this.renderGraphic(rotationStyle)}
       </svg>
     );

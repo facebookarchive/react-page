@@ -18,15 +18,29 @@
 
 var Banner = require('./elements/Banner/Banner.js');
 var React = require('React');
+var Rx = require('rx');
+var RxMixin = require('./rxutils/RxMixin');
 var SiteBoilerPlate = require('./core/SiteBoilerPlate.js');
 var VectorWidget = require('./elements/VectorWidget/VectorWidget.js');
 
 var index = React.createClass({
+
+  mixins: [RxMixin],
+
+  getSubjects: function() {
+    return {
+      isPressed: new Rx.Subject()
+    };
+  },
+
   render: function() {
     return (
       <SiteBoilerPlate>
-        <Banner bannerMessage="Welcome to React"/>
-        <VectorWidget />
+        <Banner
+          isPressedInput={this.subjects.isPressed}
+          bannerMessage="Welcome to React"
+        />
+        <VectorWidget isPressedOutput={this.subjects.isPressed} />
       </SiteBoilerPlate>
     );
   }
