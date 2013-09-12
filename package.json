@@ -4,6 +4,7 @@
   "description": "Starter Application for React, CommonJS, JSX, Server Rendering.",
   "main": "index.js",
   "dependencies": {
+    "react-art": "~0.4.1",
     "React": "git://github.com/facebook/react.git",
     "optimist": "0.6.0",
     "react-page-middleware": "git://github.com/facebook/react-page-middleware.git",

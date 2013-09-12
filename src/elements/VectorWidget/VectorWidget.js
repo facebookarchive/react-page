@@ -18,7 +18,11 @@
 "use strict";
 
 var React = require('React');
-var path = React.DOM.path;
+var ReactART = require('ReactART');
+var Group = ReactART.Group;
+var Shape = ReactART.Shape;
+var Surface = ReactART.Surface;
+var Transform = ReactART.Transform;
 
 var MOUSE_UP_DRAG = 0.978;
 var MOUSE_DOWN_DRAG = 0.9;
@@ -78,50 +82,44 @@ var VectorWidget = React.createClass({
    * describe the structure of your UI component at *any* point in time.
    */
   render: function() {
-    var rotationStyle = {
-      '-webkit-transform-origin': '50% 50%',
-      '-webkit-transform': 'rotate(' + this.state.degrees + 'deg)'
-    };
     return (
-      <svg
-        width="100%"
-        height="100%"
-        viewBox="0 0 700 700"
-        version="1.1"
-        style={{cursor: 'pointer'}}
-        onMouseDown={this.handleMouseDown}
-        onMouseUp={this.handleMouseUp}>
-        {this.renderGraphic(rotationStyle)}
-      </svg>
+      <Surface
+        width={700}
+        height={700}
+        style={{cursor: 'pointer'}}>
+        {this.renderGraphic(this.state.degrees)}
+      </Surface>
     );
   },
 
   /**
    * Better SVG support for React coming soon.
    */
-  renderGraphic: function(rotationStyle) {
+  renderGraphic: function(rotation) {
 
     return (
-      <g fill="none" stroke="none">
-        <g transform="translate(210.000000, 135.000000)">
-          <path fill="rgba(0,0,0,0.1)" d={BORDER_PATH} />
-          <path fill="#7BC7BA" d={BG_PATH} />
-          <path fill="#DCDCDC" d={BAR_PATH} />
-          <path fill="#D97B76" d={RED_DOT_PATH}/>
-          <path fill="#DBBB79" d={YELLOW_DOT_PATH} />
-          <path fill="#A6BD8A" d={GREEN_DOT_PATH}/>
-          <g transform="translate(55, 29)">
-            <g style={rotationStyle}>
-              <path fill="#FFFFFF"  d={CENTER_DOT_PATH}/>
-              <g stroke="#FFFFFF" strokeWidth="8">
-                <path d={RING_ONE_PATH} />
-                <path d={RING_TWO_PATH} transform={RING_TWO_ROTATE} />
-                <path d={RING_THREE_PATH} transform={RING_THREE_ROTATE} />
-              </g>
-            </g>
-          </g>
-        </g>
-      </g>
+      <Group
+        onMouseDown={this.handleMouseDown}
+        onMouseUp={this.handleMouseUp}>
+        <Group x={210} y={135}>
+          <Shape fill="rgba(0,0,0,0.1)" d={BORDER_PATH} />
+          <Shape fill="#7BC7BA" d={BG_PATH} />
+          <Shape fill="#DCDCDC" d={BAR_PATH} />
+          <Shape fill="#D97B76" d={RED_DOT_PATH} />
+          <Shape fill="#DBBB79" d={YELLOW_DOT_PATH} />
+          <Shape fill="#A6BD8A" d={GREEN_DOT_PATH} />
+          <Group x={55} y={29}>
+            <Group rotation={rotation} originX={84} originY={89}>
+              <Shape fill="#FFFFFF" d={CENTER_DOT_PATH} />
+              <Group>
+                <Shape d={RING_ONE_PATH} stroke="#FFFFFF" strokeWidth={8} />
+                <Shape d={RING_TWO_PATH} transform={RING_TWO_ROTATE} stroke="#FFFFFF" strokeWidth={8} />
+                <Shape d={RING_THREE_PATH} transform={RING_THREE_ROTATE} stroke="#FFFFFF" strokeWidth={8} />
+              </Group>
+            </Group>
+          </Group>
+        </Group>
+      </Group>
     );
   }
 });
@@ -136,8 +134,8 @@ var CENTER_DOT_PATH = "M84,105 C92.8365564,105 100,97.8365564 100,89 C100,80.163
 var RING_ONE_PATH = "M84,121 C130.391921,121 168,106.673113 168,89 C168,71.3268871 130.391921,57 84,57 C37.6080787,57 0,71.3268871 0,89 C0,106.673113 37.6080787,121 84,121 Z M84,121";
 var RING_TWO_PATH = "M84,121 C130.391921,121 168,106.673113 168,89 C168,71.3268871 130.391921,57 84,57 C37.6080787,57 0,71.3268871 0,89 C0,106.673113 37.6080787,121 84,121 Z M84,121";
 var RING_THREE_PATH = "M84,121 C130.391921,121 168,106.673113 168,89 C168,71.3268871 130.391921,57 84,57 C37.6080787,57 0,71.3268871 0,89 C0,106.673113 37.6080787,121 84,121 Z M84,121";
-var RING_TWO_ROTATE = "translate(84.000000, 89.000000) rotate(-240.000000) translate(-84.000000, -89.000000)";
-var RING_THREE_ROTATE = "translate(84.000000, 89.000000) rotate(-300.000000) translate(-84.000000, -89.000000)";
+var RING_TWO_ROTATE = new Transform().translate(84.000000, 89.000000).rotate(-240.000000).translate(-84.000000, -89.000000);
+var RING_THREE_ROTATE = new Transform().translate(84.000000, 89.000000).rotate(-300.000000).translate(-84.000000, -89.000000);
 
 module.exports = VectorWidget;
 
