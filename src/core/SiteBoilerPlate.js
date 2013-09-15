@@ -63,6 +63,32 @@ var SiteStyles = require('SiteStyles');
 
 SiteStyles.addLink('/core/SiteBoilerPlate.css');
 
+var SiteBoilerPlateHead = React.createClass({
+  componentDidMount: function() {
+    SiteStyles.onChange = this.forceUpdate;
+    debugger;
+  },
+
+  componentWillUnmount: function() {
+    SiteStyles.onChange = null;
+  },
+
+  render: function() {
+    return (
+      <head>
+        <title>React Page | Client-Server JavaScript Rendering</title>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no"
+        />
+
+        {SiteStyles.renderToComponents()}
+      </head>
+    );
+  }
+});
+
+
 var SiteBoilerPlate = React.createClass({
 
   componentDidMount: function() {
@@ -76,15 +102,7 @@ var SiteBoilerPlate = React.createClass({
   render: function() {
     return (
       <html>
-        <head>
-          <title>React Page | Client-Server JavaScript Rendering</title>
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, user-scalable=no"
-          />
-
-          {SiteStyles.renderToComponents()}
-        </head>
+        <SiteBoilerPlateHead />
         <body>
           {this.props.children}
         </body>
