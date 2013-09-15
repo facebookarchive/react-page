@@ -14,21 +14,24 @@
  * limitations under the License.
  */
 
-h1.banner {
-  opacity: 0;
-  font-family: "Helvetica";
-  color: #444;
-  font-weight: bold;
-  margin-top: 60px;
-  margin-bottom: 0px;
-  text-align: center;
-  -webkit-user-select: none;
-  font-size: 5vh; /* Chrome bug prevents resizing on window resize! */
-  width: 100%;    /* Putting width 100% causes repaint on resize */
-}
+var BannerCSSRules = {
+  'h1.banner': {
+    '-webkit-user-select': 'none',
+    'color': '#444',
+    'font-family': 'Helvetica',
+    'font-size': '5vh',  // Chrome bug prevents resizing on window resize!
+    'font-weight': 'bold',
+    'margin-bottom': 0,
+    'margin-top': '60px',
+    'opacity': 0,
+    'text-align': 'center',
+    'width': '100%' // Putting width 100% causes repaint on resize
+  },
 
-h1.banner.fadeIn {
-  opacity: 1;
-  transition: opacity 3s ease-in;
-}
+  'h1.banner.fadeIn': {
+    'opacity': 1,
+    'transition': 'opacity 3s ease-in'
+  }
+};
 
+module.exports = BannerCSSRules;
