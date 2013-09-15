@@ -17,6 +17,7 @@
  */
 
 var React = require('React');
+var SiteStyles = require('SiteStyles');
 
 /**
  * We should support/experiment with modelling css dependencies using the exact
@@ -31,10 +32,11 @@ var React = require('React');
  *    // Depends on css from dependency 'bootstrap' in package.json
  *    require('bootstrap/Text-Input.css');
  *
- * For now, you have to (one by one) make sure the index.js page includes the
- * css file your project depends on directly. Even in that case, we'll use
- * commonJS resolution for css files as well, so that if you whitelist things in
- * node_modules for inclusion in your bundle, the resources in those will be
+ * For now, you have to use {SiteStyles} to make sure the index.js page
+ * includes the styles your project depends on directly. Even in that case,
+ * we'll use commonJS resolution for css files as well, so that if you
+ * whitelist things in node_modules for inclusion in your bundle, the
+ * resources in those will be
  * accessible as well.
  */
 
@@ -59,19 +61,48 @@ var React = require('React');
  * });
  */
 
+SiteStyles.addLink('/core/SiteBoilerPlate.css');
+
+var SiteBoilerPlateHead = React.createClass({
+  componentDidMount: function() {
+    SiteStyles.onChange = this.forceUpdate;
+    debugger;
+  },
+
+  componentWillUnmount: function() {
+    SiteStyles.onChange = null;
+  },
+
+  render: function() {
+    return (
+      <head>
+        <title>React Page | Client-Server JavaScript Rendering</title>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no"
+        />
+
+        {SiteStyles.renderToComponents()}
+      </head>
+    );
+  }
+});
+
+
 var SiteBoilerPlate = React.createClass({
+
+  componentDidMount: function() {
+    SiteStyles.onChange = this.forceUpdate;
+  },
+
+  componentWillUnmount: function() {
+    SiteStyles.onChange = null;
+  },
+
   render: function() {
     return (
       <html>
-        <head>
-          <title>React Page | Client-Server JavaScript Rendering</title>
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, user-scalable=no"
-          />
-          <link rel="stylesheet" href="/core/SiteBoilerPlate.css" />
-          <link rel="stylesheet" href="/elements/Banner/Banner.css" />
-        </head>
+        <SiteBoilerPlateHead />
         <body>
           {this.props.children}
         </body>
