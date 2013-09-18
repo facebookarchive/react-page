@@ -17,6 +17,8 @@
  */
 
 var React = require('React');
+var ReactStyle = require('ReactStyle');
+var SiteBoilerPlateStyleRules = require('SiteBoilerPlateStyleRules');
 
 /**
  * We should support/experiment with modelling css dependencies using the exact
@@ -31,10 +33,11 @@ var React = require('React');
  *    // Depends on css from dependency 'bootstrap' in package.json
  *    require('bootstrap/Text-Input.css');
  *
- * For now, you have to (one by one) make sure the index.js page includes the
- * css file your project depends on directly. Even in that case, we'll use
- * commonJS resolution for css files as well, so that if you whitelist things in
- * node_modules for inclusion in your bundle, the resources in those will be
+ * For now, you have to use {ReactStyle#addRules} to make sure the
+ * index.js page includes the styles that your project depends on directly.
+ * Even in that case, we'll use commonJS resolution for css files as well,
+ * so that if you whitelist things in node_modules for inclusion in your
+ * bundle, the resources in those will be
  * accessible as well.
  */
 
@@ -59,19 +62,33 @@ var React = require('React');
  * });
  */
 
+ReactStyle.addRules(SiteBoilerPlateStyleRules);
+
+var SiteHead = React.createClass({
+  componentDidMount: function() {
+    ReactStyle.addEventListener('change', this.forceUpdate);
+  },
+
+  render: function() {
+    return (
+      <head>
+        <meta charset="UTF-8" />
+        <title>React Page | Client-Server JavaScript Rendering</title>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no"
+        />
+        {ReactStyle.renderToComponents()}
+      </head>
+    );
+  }
+});
+
 var SiteBoilerPlate = React.createClass({
   render: function() {
     return (
       <html>
-        <head>
-          <title>React Page | Client-Server JavaScript Rendering</title>
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, user-scalable=no"
-          />
-          <link rel="stylesheet" href="/core/SiteBoilerPlate.css" />
-          <link rel="stylesheet" href="/elements/Banner/Banner.css" />
-        </head>
+        <SiteHead  />
         <body>
           {this.props.children}
         </body>
