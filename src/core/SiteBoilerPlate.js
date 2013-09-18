@@ -66,7 +66,7 @@ ReactStyle.addRules(SiteBoilerPlateStyleRules);
 
 var SiteHead = React.createClass({
   componentDidMount: function() {
-    ReactStyle.addEventListener('change', this.forceUpdate);
+    ReactStyle.addEventListener('change', this.forceUpdate.bind(this));
   },
 
   render: function() {
