@@ -78,7 +78,7 @@ If you look at `index.js`, you'll notice that it doesn't output all the `<div>`s
 and `<span>`s directly - it _composes_ other components that take on much of that
 responsibility. `index.js` composes a `<Banner>` component, and inside of `Banner.js`,
 you'll see that the implementation of `<Banner>` outputs an `<h1>` DOM component.
-Even DOM representations such as `<h1`> are components in React
+Even DOM representations such as `<h1>` are components in React
 
 To build out your app, just add or install more components with `npm`.
 
