@@ -57,6 +57,7 @@ var Banner = React.createClass({
   },
 
   render: function() {
+
     var classes = [
       BannerStyleRules.banner,
       this.state.initialized ? BannerStyleRules.fadeIn : ''

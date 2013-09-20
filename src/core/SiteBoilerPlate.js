@@ -18,6 +18,7 @@
 
 var React = require('React');
 var ReactStyle = require('ReactStyle');
+var ReactStyleHead = require('ReactStyleHead');
 var SiteBoilerPlateStyleRules = require('SiteBoilerPlateStyleRules');
 
 /**
@@ -64,31 +65,18 @@ var SiteBoilerPlateStyleRules = require('SiteBoilerPlateStyleRules');
 
 ReactStyle.addRules(SiteBoilerPlateStyleRules);
 
-var SiteHead = React.createClass({
-  componentDidMount: function() {
-    ReactStyle.addEventListener('change', this.forceUpdate.bind(this));
-  },
-
-  render: function() {
-    return (
-      <head>
-        <meta charset="UTF-8" />
-        <title>React Page | Client-Server JavaScript Rendering</title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, user-scalable=no"
-        />
-        {ReactStyle.renderToComponents()}
-      </head>
-    );
-  }
-});
-
 var SiteBoilerPlate = React.createClass({
   render: function() {
     return (
       <html>
-        <SiteHead  />
+        <ReactStyleHead >
+          <meta charset="UTF-8" />
+          <title>React Page | Client-Server JavaScript Rendering</title>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, user-scalable=no"
+          />
+        </ReactStyleHead>
         <body>
           {this.props.children}
         </body>
