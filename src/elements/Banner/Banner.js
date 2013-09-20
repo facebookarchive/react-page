@@ -18,6 +18,8 @@
 "use strict";
 
 var React = require('React');
+var BannerStyleRules = require('BannerStyleRules');
+var ReactStyle = require('ReactStyle');
 
 /**
  * We should support/experiment with modelling css dependencies using the exact
@@ -32,12 +34,15 @@ var React = require('React');
  *    // Depends on css from dependency 'bootstrap' in package.json
  *    require('bootstrap/Text-Input.css');
  *
- * For now, you have to (one by one) make sure the index.js page includes the
- * css file your project depends on directly. Even in that case, we'll use
- * commonJS resolution for css files as well, so that if you whitelist things in
- * node_modules for inclusion in your bundle, the resources in those will be
+ * For now, you have to use {ReactStyle#addRules} to make sure the
+ * index.js page includes the styles that your project depends on directly.
+ * Even in that case, we'll use commonJS resolution for css files as well,
+ * so that if you whitelist things in node_modules for inclusion in your
+ * bundle, the resources in those will be
  * accessible as well.
  */
+
+ReactStyle.addRules(BannerStyleRules);
 
 /**
  * Look at Banner, Michael!
@@ -46,12 +51,17 @@ var Banner = React.createClass({
   getInitialState: function() {
     return {initialized: false};
   },
+
   componentDidMount: function() {
     this.setState({initialized: true});
   },
+
   render: function() {
-    var classes =
-      'banner ' + (this.state.initialized ? 'fadeIn' : '');
+
+    var classes = [
+      BannerStyleRules.banner,
+      this.state.initialized ? BannerStyleRules.fadeIn : ''
+    ].join(' ');
     return (
       <h1 className={classes}>
         {this.props.bannerMessage}
