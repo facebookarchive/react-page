@@ -30,6 +30,7 @@ var port = argv.port;
 var isServer = !argv.computeForPath;
 
 var serverDefaults = {
+  serverRender: true,
   useBrowserBuiltins: false,
   logTiming: true,
   useSourceMaps: true,
@@ -37,6 +38,7 @@ var serverDefaults = {
 };
 
 var computeDefaults = {
+  serverRender: false, // Not going to matter anyways.
   useBrowserBuiltins: false,
   logTiming: false,
   useSourceMaps: false,
@@ -63,6 +65,8 @@ var buildOptions = {
     return p.indexOf('__tests__') !== -1;
   },
   blacklistRE: argv.blacklistRE && new RegExp(argv.blacklistRE),
+  serverRender: 'serverRender' in argv ?
+    argv.serverRender === 'true': defaults.serverRender,
   dev: argv.dev === 'true'
 };
 
