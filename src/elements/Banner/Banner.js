@@ -18,7 +18,7 @@
 "use strict";
 
 var React = require('React');
-var BannerStyleRules = require('BannerStyleRules');
+var BannerStyleRules = require('./BannerStyleRules.js');
 var ReactStyle = require('ReactStyle');
 
 /**

@@ -19,7 +19,7 @@
 var React = require('React');
 var ReactStyle = require('ReactStyle');
 var ReactStyleHead = require('ReactStyleHead');
-var SiteBoilerPlateStyleRules = require('SiteBoilerPlateStyleRules');
+var SiteBoilerPlateStyleRules = require('./SiteBoilerPlateStyleRules.js');
 
 /**
  * We should support/experiment with modelling css dependencies using the exact
