@@ -3,6 +3,7 @@
   "version": "0.2.0",
   "description": "Starter Application for React, CommonJS, JSX, Server Rendering.",
   "main": "index.js",
+  "start": "node server.js",
   "dependencies": {
     "React": "git://github.com/facebook/react.git",
     "react-styles": "git://github.com/hedgerwang/react-styles.git",
