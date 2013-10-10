@@ -11,7 +11,8 @@ var Map = React.createClass({
   getInitialState: function() {
     return {
       map : null,
-      markers : []
+      markers : [],
+      ready : false
     };
   },
 
@@ -22,7 +23,8 @@ var Map = React.createClass({
       longitude: 0,
       zoom: 4,
       width: 500,
-      height: 500
+      height: 500,
+      points: []
     }
   },
 
@@ -59,9 +61,12 @@ var Map = React.createClass({
 
   render : function() {
 
+    if( ! this.state.ready ) return(<div></div>);
+
     var style = {
       width: this.props.width,
-      height: this.props.height
+      height: this.props.height,
+      background: 'blue'
     }
 
     return (
@@ -69,19 +74,29 @@ var Map = React.createClass({
     );
   },
 
-  // when component is included in the dom, load the JS libary spesific things on this element
+
   componentDidMount : function() {
 
-    var mapOptions = {
-      zoom: this.props.zoom,
-      center: new google.maps.LatLng( this.props.latitude , this.props.longitude ),
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    
-    var map = new google.maps.Map( this.getDOMNode(), mapOptions);
+    window.mapLoaded = (function() {
 
-    this.setState( { map : map } );
-    this.updateMarkers(this.props.points);
+      var mapOptions = {
+        zoom: this.props.zoom,
+        center: new google.maps.LatLng( this.props.latitude , this.props.longitude ),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      
+      var map = new google.maps.Map( this.getDOMNode(), mapOptions);
+
+      this.setState( { map : map, ready : true } );
+      console.log( this.props );
+      this.updateMarkers(this.props.points);
+
+    }).bind(this);
+
+    var s =document.createElement('script');
+    s.src = "https://maps.googleapis.com/maps/api/js?key=&sensor=false&callback=mapLoaded";
+    document.head.appendChild( s );
+
   },
 
   // update markers if needed
