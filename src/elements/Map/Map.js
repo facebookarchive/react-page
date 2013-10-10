@@ -15,8 +15,8 @@ var Map = React.createClass({
   // set some default values
   getDefaultProps: function() {
     return {
-      latitude: 60.170833,
-      longitude: 24.9375,
+      latitude: 0,
+      longitude: 0,
       zoom: 4,
       width: 500,
       height: 500
@@ -87,36 +87,3 @@ var Map = React.createClass({
   }
 
 });
-
-var MapsContainer = React.createClass({
-
-  getInitialState: function() {
-    return {
-      points : [],
-      ready : true
-    };
-  },
-
-  addPoint : function() {
-    this.setState( { points : [] } );
-  },
-
-  render: function() {
-    if( ! this.state.ready ) return(<div>Wait</div>);
-
-    return (
-      <div>
-        <Map points={this.state.points} zoom={9} />
-      </div>
-    )
-  },
-
-  componentWillMount: function() {
-    // todo: add here the stuff for loading library dynamically
-  }
-});
-
-React.renderComponent(
-  <MapsContainer />,
-  document.getElementById('container')
-);
