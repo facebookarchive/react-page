@@ -24,7 +24,9 @@ var Map = React.createClass({
       zoom: 4,
       width: 500,
       height: 500,
-      points: []
+      points: [],
+      gmaps_api_key: '',
+      gmaps_sensor: false
     }
   },
 
@@ -65,8 +67,7 @@ var Map = React.createClass({
 
     var style = {
       width: this.props.width,
-      height: this.props.height,
-      background: 'blue'
+      height: this.props.height
     }
 
     return (
@@ -74,6 +75,9 @@ var Map = React.createClass({
     );
   },
 
+  debug : function() {
+    console.log("Jee!");
+  },
 
   componentDidMount : function() {
 
@@ -94,7 +98,7 @@ var Map = React.createClass({
     }).bind(this);
 
     var s =document.createElement('script');
-    s.src = "https://maps.googleapis.com/maps/api/js?key=&sensor=false&callback=mapLoaded";
+    s.src = 'https://maps.googleapis.com/maps/api/js?key=' + this.props.gmaps_api_key + '&sensor=' + this.props.gmaps_sensor + '&callback=mapLoaded';
     document.head.appendChild( s );
 
   },
