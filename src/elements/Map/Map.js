@@ -1,6 +1,9 @@
 /**
  * @jsx React.DOM
  */
+"use strict";
+
+var React = require('React');
 
 var Map = React.createClass({
 
@@ -87,3 +90,5 @@ var Map = React.createClass({
   }
 
 });
+
+module.exports = Map;
