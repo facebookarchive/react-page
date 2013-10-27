@@ -7,7 +7,7 @@
 
 <br>
 
-##Install
+##Install (Mac/Linux)
 
 > Clone this project
 
@@ -170,6 +170,7 @@ up in browser.
 
 #### TODO:
 
+  - Windows support (depends on fixing https://github.com/facebook/node-haste/pull/2)
   - Allow sharing of css/images through npm packages.
   - Experiments with optimizing page load time - incremental streaming of
   markup/resources.
