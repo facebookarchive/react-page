@@ -7,7 +7,7 @@
 
 <br>
 
-##Install (Mac/Linux)
+##Install (Mac/Linux - requires a recent version of node/npm)
 
 > Clone this project
 
