@@ -31,24 +31,30 @@ var isServer = !argv.computeForPath;
 
 var serverDefaults = {
   serverRender: true,
+  skipES5Shim: false,
   useBrowserBuiltins: false,
   logTiming: true,
   useSourceMaps: true,
-  pageRouteRoot: FILE_SERVE_ROOT
+  pageRouteRoot: FILE_SERVE_ROOT,
+  sourceMapsType: 'linked'
 };
 
 var computeDefaults = {
-  serverRender: false, // Not going to matter anyways.
+  serverRender: false,
+  skipES5Shim: false,
   useBrowserBuiltins: false,
   logTiming: false,
   useSourceMaps: false,
-  pageRouteRoot: FILE_SERVE_ROOT
+  pageRouteRoot: FILE_SERVE_ROOT,
+  sourceMapsType: 'linked'
 };
 
 var defaults = isServer ? serverDefaults : computeDefaults;
 
 var buildOptions = {
   projectRoot: PROJECT_ROOT,
+  skipES5Shim: argv.skipES5Shim == 'true',      // Skip shim if you know you have
+                                                // a very modern browser.
   useBrowserBuiltins:                           // Include node util modules.
     'useBrowserBuiltins' in argv ?
     argv.useBrowserBuiltins === 'true' :
@@ -56,6 +62,8 @@ var buildOptions = {
   logTiming: 'logTiming' in argv ?              // Colored timing logs.
     argv.logTiming === 'true' :
     defaults.logTiming,
+  sourceMapsType: 'sourceMapsType' in argv ?
+    argv.sourceMapsType: defaults.sourceMapsType,
   pageRouteRoot: 'pageRouteRoot' in argv ?
     argv.pageRouteRoot : defaults.pageRouteRoot, // URLs based in this directory
   useSourceMaps: 'useSourceMaps' in argv ?
