@@ -7,6 +7,8 @@
 
 <br>
 
+####Important: `react-page` depends on `react-page-middleware` and `react-page-middleware` is currently broken if `react-page/server.js` specifies `serverRendering:true`. Working on a fix: ETA 8 hours. You can always check out older versions and npm link react-page to another version of react-page-middleware. Alternatively, disable server rendering in `react-page` until the fix is delivered.
+
 ##Install (Mac/Linux - requires a recent version of node/npm)
 
 > Clone this project
