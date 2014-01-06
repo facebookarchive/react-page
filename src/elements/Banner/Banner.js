@@ -18,31 +18,6 @@
 "use strict";
 
 var React = require('React');
-var BannerStyleRules = require('./BannerStyleRules.js');
-var ReactStyle = require('ReactStyle');
-
-/**
- * We should support/experiment with modelling css dependencies using the exact
- * same commonJS resolution, so that we can include CSS files in our React npm
- * modules. An npm module should include everything needed to work with your
- * component - and it is impossible to know where your component will be
- * installed to.
- *
- *    // Depends on css from my project - relative paths automatically resolved.
- *    require('./Banner.css');
- *
- *    // Depends on css from dependency 'bootstrap' in package.json
- *    require('bootstrap/Text-Input.css');
- *
- * For now, you have to use {ReactStyle#addRules} to make sure the
- * index.js page includes the styles that your project depends on directly.
- * Even in that case, we'll use commonJS resolution for css files as well,
- * so that if you whitelist things in node_modules for inclusion in your
- * bundle, the resources in those will be
- * accessible as well.
- */
-
-ReactStyle.addRules(BannerStyleRules);
 
 /**
  * Look at Banner, Michael!
@@ -57,10 +32,9 @@ var Banner = React.createClass({
   },
 
   render: function() {
-
     var classes = [
-      BannerStyleRules.banner,
-      this.state.initialized ? BannerStyleRules.fadeIn : ''
+      'banner',
+      this.state.initialized ? 'fadeIn' : ''
     ].join(' ');
     return (
       <h1 className={classes}>
