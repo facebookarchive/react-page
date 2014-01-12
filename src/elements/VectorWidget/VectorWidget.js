@@ -78,9 +78,15 @@ var VectorWidget = React.createClass({
    * describe the structure of your UI component at *any* point in time.
    */
   render: function() {
+    var transformOrigin = '50% 50%';
+    var transform = 'rotate(' + this.state.degrees + 'deg)';
+
     var rotationStyle = {
-      '-webkit-transform-origin': '50% 50%',
-      '-webkit-transform': 'rotate(' + this.state.degrees + 'deg)'
+      WebkitTransformOrigin: transformOrigin,
+      WebkitTransform: transform,
+      // TODO: Figure out why transform-origin don't work in Firefox
+      // transformOrigin: transformOrigin,
+      // transform: transform
     };
     return (
       <svg
