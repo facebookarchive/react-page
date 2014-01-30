@@ -1,4 +1,8 @@
-# This project is no longer maintained. Proceed at your own risk!
+- - -
+
+**_This project is not actively maintained. Proceed at your own risk!_**
+
+- - -
 
 <img height="224px" width="704px" src="./src/elements/Banner/ReactPageLogo@2x.png"/>
 
