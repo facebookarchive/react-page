@@ -1,3 +1,5 @@
+# This project is no longer maintained. Proceed at your own risk!
+
 <img height="224px" width="704px" src="./src/elements/Banner/ReactPageLogo@2x.png"/>
 
 
@@ -121,7 +123,7 @@ Here are a couple of examples of the default configuration:
     # --useBrowserBuiltins=false  # Allow node modules (util)  - default:false
     # --logTiming=true            # Shows colored timing metrics - default:true
     # --pageRouteRoot=<root_dir>  # page URLs root - default: react-page/src
-    
+
     # for example:
     node server.js --useSourceMaps=true
 
@@ -141,7 +143,7 @@ is as easy as a single `wget` command.
 
     node server.js
     wget -mpck --user-agent="" -e robots=off http://localhost:8080/index.html
-    
+
 Get `wget` on OS X: try http://osxdaily.com/2012/05/22/install-wget-mac-os-x/ or if you have brew: `brew install wget`
 
 This prebuilds your entire interactive site, so it can be served from a file server or github etc.
