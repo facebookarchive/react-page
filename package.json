@@ -7,7 +7,7 @@
   "dependencies": {
     "React": "git://github.com/facebook/react.git",
     "optimist": "0.6.0",
-    "react-page-middleware": "git://github.com/facebook/react-page-middleware.git",
+    "react-page-middleware": "git://github.com/reactjs/react-page-middleware.git",
     "connect": "2.8.3"
   },
   "author": {
