@@ -1,13 +1,13 @@
 <img height="224px" width="704px" src="./src/elements/Banner/ReactPageLogo@2x.png"/>
 
 
-  - <h4>Render [React](http://www.github.com/facebook/react/) pages on the server or client - _effortlessly_.</h4>
-  - <h4>Use CommonJS to build and share UI components.</h4>
-  - <h4>Develop rapidly - instant reloading.</h4>
+  - #### Render [React](http://www.github.com/facebook/react/) pages on the server or client - _effortlessly_.
+  - #### Use CommonJS to build and share UI components.
+  - #### Develop rapidly - instant reloading.
 
 <br>
 
-##Install
+## Install
 
 > Clone this project
 
@@ -22,7 +22,7 @@
     # Make changes to src/index.js, and refresh instantly!
 
 
-##Philosophy
+## Philosophy
 
 ##### Why Server Rendering?
 
@@ -40,7 +40,7 @@
   - Server rendering optional - you can always just use React as a declarative client side framework.
 
 
-##Developing
+## Developing
 
 #### Default Project Structure
 
@@ -120,7 +120,7 @@ Here are a couple of examples of the default configuration:
     # --useBrowserBuiltins=false  # Allow node modules (util)  - default:false
     # --logTiming=true            # Shows colored timing metrics - default:true
     # --pageRouteRoot=<root_dir>  # page URLs root - default: react-page/src
-    
+
     # for example:
     node server.js --useSourceMaps=true
 
